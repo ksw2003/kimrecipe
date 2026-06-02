@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Recipe Generator</title>
+{% extends "base.html" %}
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}"
-    />
-</head>
+{% block content %}
 
-<body>
+<div class="container">
 
     <h2>Input 3 Ingredients</h2>
 
@@ -42,26 +35,26 @@
 
         <select name="cuisine" id="cuisine">
             {% for cuisine in cuisines %}
-            <option value="{{ cuisine }}">
+            <option value="{{ cuisine|lower|replace(' ','-') }}">
                 {{ cuisine }}
             </option>
             {% endfor %}
         </select>
 
-        <label class="subheading">
+        <label class="subheading" for="restrictions">
             Dietary Restrictions:
         </label>
 
         <div class="checkbox-container">
             {% for restriction in dietary_restrictions %}
-            <div class="checkbox-group">
+            <div class="checkbox-group" name="restrictions">
 
                 <label class="checkbox-label">
 
                     <input
                         type="checkbox"
                         name="restrictions"
-                        value="{{ restriction }}"
+                        value="{{ restriction|lower|replace(' ','-') }}"
                     >
 
                     {{ restriction }}
@@ -77,14 +70,12 @@
         </label>
 
         <select name="language" id="language">
-            {% for language in languages.keys() %}
-            <option value="{{ language }}">
+            {% for language in languages %}
+            <option value="{{ language|lower|replace(' ','-') }}">
                 {{ language }}
             </option>
             {% endfor %}
         </select>
-
-        <br><br>
 
         <input
             type="submit"
@@ -92,10 +83,7 @@
         >
 
     </form>
+    <footer>2023620008 김서원</footer>
+</div>
 
-    <footer>
-        2023620008 김서원
-    </footer>
-
-</body>
-</html>
+{% endblock %}
